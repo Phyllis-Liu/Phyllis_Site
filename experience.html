@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Phyllis Liu</title>
+    <script type="module" src="/src/main.js"></script>
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --accent-color: #007bff;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo-area {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-area">LOGO AREA</div>
+        <nav class="nav-menu">
+            <a href="skills.html" class="nav-item">SKILL</a>
+            <a href="experience.html" class="nav-item">EXPERIENCE</a>
+            <a href="blog.html" class="nav-item">BLOG</a>
+            <a href="contact.html" class="nav-item">CONTACT</a>
+            <a href="#" class="nav-item">EN</a>
+        </nav>
+    </header>
+    <experience-page></experience-page>
+</body>
+</html>
