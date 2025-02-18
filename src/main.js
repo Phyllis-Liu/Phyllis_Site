@@ -1,5 +1,6 @@
 import './components/my-app.js';
 import './components/skill-page.js';
+import './components/blog-page.js';
 
 // 添加全局樣式
 const style = document.createElement('style');
