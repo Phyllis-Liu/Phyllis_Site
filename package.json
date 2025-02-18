@@ -1,0 +1,21 @@
+{
+  "name": "phyllis_site",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+"build": "npx vite build",
+"dev": "npx vite --host",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "lit": "^3.2.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4",
+    "vite": "^6.1.0"
+  }
+}
