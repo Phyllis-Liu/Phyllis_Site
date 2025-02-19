@@ -1,4 +1,6 @@
 import { LitElement, html, css } from 'lit';
+import { Header, headerStyles } from './header.js';
+import { Footer } from './footer.js';
 
 export class BlogPage extends LitElement {
   static styles = css`
@@ -98,16 +100,7 @@ export class BlogPage extends LitElement {
 
   render() {
     return html`
-      <nav class="nav-bar">
-        <div class="logo">LOGO AREA</div>
-        <div class="nav-links">
-          <a href="/skills">SKILL</a>
-          <a href="/experience">EXPERIENCE</a>
-          <a href="/blog">BLOG</a>
-          <a href="/contact">CONTACT</a>
-          <a href="#" @click=\${this._toggleLanguage}>EN</a>
-        </div>
-      </nav>
+      ${Header()}
 
       <h1 class="blog-title">Blog</h1>
 
@@ -117,9 +110,7 @@ export class BlogPage extends LitElement {
 
       <a href="#" class="more-button">MORE</a>
 
-      <footer class="footer">
-        Copyright © 2025 Phyllis Liu. All rights reserved.
-      </footer>
+      ${Footer()}
     `;
   }
 

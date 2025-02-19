@@ -1,4 +1,6 @@
 import { LitElement, html, css } from 'lit';
+import { Header, headerStyles } from './header.js';
+import { Footer } from './footer.js';
 
 export class MyApp extends LitElement {
     static styles = css`
@@ -120,16 +122,7 @@ export class MyApp extends LitElement {
 
     render() {
         return html`
-            <div class="header">
-                <div class="logo-area">LOGO AREA</div>
-                <nav class="nav-menu">
-                    <a class="nav-item">SKILL</a>
-                    <a class="nav-item">EXPERIENCE</a>
-                    <a class="nav-item">BLOG</a>
-                    <a class="nav-item">CONTACT</a>
-                    <a class="nav-item">EN</a>
-                </nav>
-            </div>
+            ${Header()}
 
             <div class="main-content">
                 <div class="photo-area">
@@ -156,9 +149,7 @@ export class MyApp extends LitElement {
                 </div>
             </div>
 
-            <div class="footer">
-                Copyright © 2025 Phyllis Liu. All rights reserved.
-            </div>
+            ${Footer()}
         `;
     }
 }
