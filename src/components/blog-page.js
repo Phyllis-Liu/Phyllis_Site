@@ -3,34 +3,13 @@ import { Header, headerStyles } from './header.js';
 import { Footer } from './footer.js';
 
 export class BlogPage extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      font-family: Arial, sans-serif;
-    }
-
-    .nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
-
-    .logo {
-      border: 1px solid #000;
-      padding: 1rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #666;
-    }
+  static styles = [
+    headerStyles,
+    css`
+      :host {
+        display: block;
+        min-height: 100vh;
+      }
 
     .blog-title {
       text-align: center;
@@ -92,11 +71,11 @@ export class BlogPage extends LitElement {
 
     .footer {
       text-align: center;
+      padding: 1rem;
       color: #666;
-      padding: 2rem;
       margin-top: 2rem;
     }
-  `;
+  `];
 
   render() {
     return html`

@@ -75,7 +75,7 @@ export class ExperiencePage extends LitElement {
           <h2 class="education-title">Education</h2>
           <div class="education-items">
             <div class="education-item">
-              <img src="public/images/shih-hsin-logo.png" alt="Shih Hsin University" class="school-logo">
+              <img src="images/shih-hsin-logo.png" alt="Shih Hsin University" class="school-logo">
               <div class="school-info">
                 <h3>Shih Hsin University</h3>
                 <p>Bachelor's degree / English Language and Literature</p>
@@ -83,7 +83,7 @@ export class ExperiencePage extends LitElement {
               </div>
             </div>
             <div class="education-item">
-              <img src="public/images/apc-logo.png" alt="Australia Pacific College" class="school-logo">
+              <img src="images/apc-logo.png" alt="Australia Pacific College" class="school-logo">
               <div class="school-info">
                 <h3>Australia Pacific College</h3>
                 <p>Advanced Diploma / Marketing and Communication</p>
