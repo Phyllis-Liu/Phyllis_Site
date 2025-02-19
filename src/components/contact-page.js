@@ -1,11 +1,9 @@
 import { LitElement, html, css } from 'lit';
-import { Header, headerStyles } from './header.js';
+import { Header } from './header.js';
 import { Footer } from './footer.js';
 
 export class ContactPage extends LitElement {
-    static styles = [
-        headerStyles,
-        css`
+    static styles = css`
             :host {
                 display: block;
                 min-height: 100vh;
@@ -108,12 +106,11 @@ export class ContactPage extends LitElement {
                 background: #666;
                 color: white;
             }
-        `
-    ];
+        `;
 
     render() {
         return html`
-            ${Header()}
+            <header-component></header-component>
             <div class="contact-container">
                 <div class="contact-content">
                     <div class="contact-info">
@@ -159,7 +156,7 @@ export class ContactPage extends LitElement {
                 </form>
                 </div>
             </div>
-            ${Footer()}
+            <footer-component></footer-component>
         `;
     }
 }

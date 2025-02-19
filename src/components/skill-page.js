@@ -1,34 +1,12 @@
 import { LitElement, html, css } from 'lit';
+import { Header } from './header.js';
+import { Footer } from './footer.js';
 
 export class SkillPage extends LitElement {
   static styles = css`
     :host {
       display: block;
       font-family: Arial, sans-serif;
-    }
-
-    .nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: white;
-    }
-
-    .logo-area {
-      border: 1px solid #000;
-      padding: 1rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #666;
     }
 
     .main-content {
@@ -81,28 +59,11 @@ export class SkillPage extends LitElement {
       transform: translateX(-50%);
     }
 
-    .footer {
-      text-align: center;
-      padding: 2rem;
-      color: #666;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
   `;
 
   render() {
     return html`
-      <div class="nav-bar">
-        <div class="logo-area">LOGO AREA</div>
-        <div class="nav-links">
-          <a href="/skill">SKILL</a>
-          <a href="/experience">EXPERIENCE</a>
-          <a href="/blog">BLOG</a>
-          <a href="/contact">CONTACT</a>
-          <a href="#" @click=\${this._toggleLanguage}>EN</a>
-        </div>
-      </div>
+      <header-component></header-component>
 
       <div class="main-content">
         <h1>Skill & Ability</h1>
@@ -113,9 +74,7 @@ export class SkillPage extends LitElement {
         </div>
       </div>
 
-      <div class="footer">
-        Copyright © 2025 Phyllis Liu. All rights reserved.
-      </div>
+      <footer-component></footer-component>
     `;
   }
 

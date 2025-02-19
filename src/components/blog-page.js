@@ -1,11 +1,9 @@
 import { LitElement, html, css } from 'lit';
-import { Header, headerStyles } from './header.js';
+import { Header } from './header.js';
 import { Footer } from './footer.js';
 
 export class BlogPage extends LitElement {
-  static styles = [
-    headerStyles,
-    css`
+  static styles = css`
       :host {
         display: block;
         min-height: 100vh;
@@ -75,11 +73,11 @@ export class BlogPage extends LitElement {
       color: #666;
       margin-top: 2rem;
     }
-  `];
+  `;
 
   render() {
     return html`
-      ${Header()}
+      <header-component></header-component>
 
       <h1 class="blog-title">Blog</h1>
 
@@ -89,7 +87,7 @@ export class BlogPage extends LitElement {
 
       <a href="#" class="more-button">MORE</a>
 
-      ${Footer()}
+      <footer-component></footer-component>
     `;
   }
 

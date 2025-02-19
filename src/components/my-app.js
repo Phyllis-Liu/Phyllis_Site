@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { Header, headerStyles } from './header.js';
+import { Header } from './header.js';
 import { Footer } from './footer.js';
 
 export class MyApp extends LitElement {
@@ -122,7 +122,7 @@ export class MyApp extends LitElement {
 
     render() {
         return html`
-            ${Header()}
+            <header-component></header-component>
 
             <div class="main-content">
                 <div class="photo-area">
@@ -149,7 +149,7 @@ export class MyApp extends LitElement {
                 </div>
             </div>
 
-            ${Footer()}
+            <footer-component></footer-component>
         `;
     }
 }

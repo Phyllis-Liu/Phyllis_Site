@@ -1,10 +1,17 @@
 import { LitElement, html, css } from 'lit';
+import './timeline-element.js';
+import { Header } from './header.js';
+import { Footer } from './footer.js';
 
 export class ExperiencePage extends LitElement {
   static styles = css`
     :host {
       display: block;
       font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    .experience-page {
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
@@ -15,7 +22,6 @@ export class ExperiencePage extends LitElement {
       color: #666;
       margin-bottom: 50px;
     }
-
 
     .education {
       margin-top: 100px;
@@ -66,8 +72,9 @@ export class ExperiencePage extends LitElement {
 
   render() {
     return html`
+      <header-component></header-component>
       <div class="experience-page">
-        <h1 class="title">Experience</h1>
+        <h1 class="title">Experience</h1>        
         
         <timeline-element></timeline-element>
 
@@ -75,15 +82,15 @@ export class ExperiencePage extends LitElement {
           <h2 class="education-title">Education</h2>
           <div class="education-items">
             <div class="education-item">
-              <img src="images/shih-hsin-logo.png" alt="Shih Hsin University" class="school-logo">
+              <img src="/images/shih-hsin-logo.png" alt="Shih Hsin University" class="school-logo">
               <div class="school-info">
                 <h3>Shih Hsin University</h3>
                 <p>Bachelor's degree / English Language and Literature</p>
                 <p>2006 - 2010</p>
-              </div>
+                </div>
             </div>
             <div class="education-item">
-              <img src="images/apc-logo.png" alt="Australia Pacific College" class="school-logo">
+              <img src="/images/apc-logo.png" alt="Australia Pacific College" class="school-logo">
               <div class="school-info">
                 <h3>Australia Pacific College</h3>
                 <p>Advanced Diploma / Marketing and Communication</p>
@@ -97,6 +104,7 @@ export class ExperiencePage extends LitElement {
           Copyright © 2025 Phyllis Liu. All rights reserved.
         </div>
       </div>
+      <footer-component></footer-component>
     `;
   }
 }
