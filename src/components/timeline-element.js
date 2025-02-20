@@ -22,19 +22,23 @@ class EventElement extends LitElement {
       opacity: 0;
       visibility: hidden;
       text-align: center;
+      z-index: 3;
     }
 
+    /* 向上顯示的訊息 */
     :host([is-odd]) .event-content {
       bottom: 100%;
       margin-bottom: 20px;
     }
 
+    /* 向下顯示的訊息 - 增加間距 */
     :host(:not([is-odd])) .event-content {
       top: 100%;
       margin-top: 20px;
     }
 
-    :host(:hover) .event-content {
+    :host(:hover) .event-content,
+    :host([active]) .event-content {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -84,7 +88,8 @@ class EventElement extends LitElement {
       z-index: 2;
     }
 
-    :host(:hover) .dot {
+    :host(:hover) .dot,
+    :host([active]) .dot {
       background-color: var(--dot-hover-bg-color);
       transform: scale(1.2);
     }
@@ -96,7 +101,8 @@ class EventElement extends LitElement {
       transition: all 0.3s ease;
     }
 
-    :host(:hover) .year {
+    :host(:hover) .year,
+    :host([active]) .year {
       color: var(--dot-border-color);
     }
 
@@ -161,6 +167,7 @@ class EventElement extends LitElement {
     description: { type: String },
     company: { type: String },
     isOdd: { type: Boolean, reflect: true, attribute: "is-odd" },
+    active: { type: Boolean, reflect: true }
   };
 
   render() {
@@ -194,7 +201,12 @@ export class TimelineElement extends LitElement {
       max-width: 1000px;
       margin: 0 auto;
       position: relative;
-      padding: 40px 20px;
+      /* 大幅增加上下間距，確保有足夠顯示空間 */
+      padding: 100px 20px 160px;
+    }
+
+    .container {
+      position: relative;
     }
 
     .timeline {
@@ -202,7 +214,8 @@ export class TimelineElement extends LitElement {
       position: relative;
       justify-content: space-between;
       align-items: center;
-      min-height: 150px;
+      /* 增加時間軸高度，確保上下都有足夠空間 */
+      min-height: 200px;
     }
 
     .timeline::before {
@@ -216,7 +229,80 @@ export class TimelineElement extends LitElement {
       transform: translateY(-50%);
     }
 
+    /* 控制按鈕放在最底部，確保有足夠距離 */
+    .controls {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      bottom: -120px;
+      left: 0;
+      right: 0;
+      gap: 15px;
+      z-index: 5;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px 0;
+      border-radius: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    button:hover {
+      background-color: #e9e9e9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    button.active {
+      background-color: var(--dot-border-color);
+      color: white;
+    }
+
+    .progress-indicator {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      bottom: -90px;
+      left: 0;
+      right: 0;
+      gap: 8px;
+    }
+
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #ddd;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .progress-dot.active {
+      background-color: var(--dot-border-color);
+      transform: scale(1.2);
+    }
+
+    /* 在時間軸下方增加清除浮動的空間 */
+    .spacer {
+      height: 100px;
+      width: 100%;
+      clear: both;
+    }
+
     @media (max-width: 768px) {
+      :host {
+        padding-bottom: 150px;
+        padding-top: 60px;
+      }
+
       .timeline {
         flex-direction: column;
         align-items: flex-start;
@@ -230,12 +316,22 @@ export class TimelineElement extends LitElement {
         top: 0;
         transform: none;
       }
-        
+
+      .controls {
+        bottom: -130px;
+        flex-wrap: wrap;
+      }
+
+      .progress-indicator {
+        bottom: -100px;
+      }
     }
   `;
 
   static properties = {
-    events: { type: Array }
+    events: { type: Array },
+    activeIndex: { type: Number },
+    isPlaying: { type: Boolean }
   };
 
   constructor() {
@@ -278,20 +374,96 @@ export class TimelineElement extends LitElement {
       },
       { title: "Current", description: "Upskill Now, Unlock Wow!" }
     ];
+    this.activeIndex = 0;
+    this.isPlaying = false;
+    this.playInterval = null;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // 自動開始播放
+    this.startAutoplay();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.stopAutoplay();
+  }
+
+  startAutoplay() {
+    this.isPlaying = true;
+    this.playInterval = setInterval(() => {
+      this.activeIndex = (this.activeIndex + 1) % this.events.length;
+    }, 3000); // 每3秒切換一次
+  }
+
+  stopAutoplay() {
+    this.isPlaying = false;
+    if (this.playInterval) {
+      clearInterval(this.playInterval);
+      this.playInterval = null;
+    }
+  }
+
+  toggleAutoplay() {
+    if (this.isPlaying) {
+      this.stopAutoplay();
+    } else {
+      this.startAutoplay();
+    }
+  }
+
+  goToNext() {
+    this.stopAutoplay();
+    this.activeIndex = (this.activeIndex + 1) % this.events.length;
+  }
+
+  goToPrevious() {
+    this.stopAutoplay();
+    this.activeIndex = (this.activeIndex - 1 + this.events.length) % this.events.length;
+  }
+
+  selectIndex(index) {
+    this.stopAutoplay();
+    this.activeIndex = index;
   }
 
   render() {
     return html`
-      <div class="timeline" role="list">
-        ${this.events.map((event, index) => html`
-          <event-element
-            .title=${event.title}
-            .description=${event.description}
-            .company=${event.company}
-            ?is-odd=${index % 2 === 0}
-            role="listitem"
-          ></event-element>
-        `)}
+      <div class="container">
+        <div class="timeline" role="list">
+          ${this.events.map((event, index) => html`
+            <event-element
+              .title=${event.title}
+              .description=${event.description}
+              .company=${event.company}
+              ?is-odd=${index % 2 === 0}
+              ?active=${index === this.activeIndex}
+              role="listitem"
+              @click=${() => this.selectIndex(index)}
+            ></event-element>
+          `)}
+        </div>
+        
+        <!-- 增加空間，確保內容有足夠顯示區域 -->
+        <div class="spacer"></div>
+        
+        <div class="progress-indicator">
+          ${this.events.map((_, index) => html`
+            <div 
+              class="progress-dot ${index === this.activeIndex ? 'active' : ''}"
+              @click=${() => this.selectIndex(index)}
+            ></div>
+          `)}
+        </div>
+        
+        <div class="controls">
+          <button @click=${this.goToPrevious}>PREVIOUS</button>
+          <button @click=${this.toggleAutoplay} class="${this.isPlaying ? 'active' : ''}">
+            ${this.isPlaying ? 'STOP' : 'PLAY'}
+          </button>
+          <button @click=${this.goToNext}>NEXT</button>
+        </div>
       </div>
     `;
   }
