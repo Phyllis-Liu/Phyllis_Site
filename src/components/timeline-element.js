@@ -111,6 +111,12 @@ class EventElement extends LitElement {
       font-size: 0.9rem;
       color: #666;
     }
+    
+    .company-name {
+      display: block;
+      margin-top: 3px;
+      font-style: italic;
+    }
 
     @media (max-width: 768px) {
       :host {
@@ -153,6 +159,7 @@ class EventElement extends LitElement {
   static properties = {
     title: { type: String },
     description: { type: String },
+    company: { type: String },
     isOdd: { type: Boolean, reflect: true, attribute: "is-odd" },
   };
 
@@ -162,7 +169,10 @@ class EventElement extends LitElement {
       <div class="year">${this.title}</div>
       <div class="event-content">
         <h3>${this.title}</h3>
-        <p>${this.description}</p>
+        <p>
+          ${this.description}
+          ${this.company ? html`<span class="company-name">${this.company}</span>` : ''}
+        </p>
       </div>
     `;
   }
@@ -231,14 +241,42 @@ export class TimelineElement extends LitElement {
   constructor() {
     super();
     this.events = [
-      { title: "2010", description: "世新大學畢業" },
-      { title: "2011", description: "開始第一份工作" },
-      { title: "2012", description: "轉職新領域" },
-      { title: "2013", description: "持續成長" },
-      { title: "2015", description: "職涯轉折點" },
-      { title: "2017", description: "新的挑戰" },
-      { title: "2022", description: "重要里程碑" },
-      { title: "Current", description: "現在" }
+      { 
+        title: "2010", 
+        description: "Administrative Officer", 
+        company: "Power Point Management Ltd."
+      },
+      { 
+        title: "2011", 
+        description: "Marcom Executive", 
+        company: "iMap Intelligence Training."
+      },
+      { 
+        title: "2012", 
+        description: "Customs Clearance Agent", 
+        company: "U-Line Express Ltd."
+      },
+      { 
+        title: "2013", 
+        description: "Marcom Exec & Manual Writer", 
+        company: "Rextron International, Inc."
+      },
+      { 
+        title: "2015", 
+        description: "Digital Marketing Executive", 
+        company: "WaveThink Technology., Inc."
+      },
+      { 
+        title: "2017", 
+        description: "Postal Service Officer", 
+        company: "Australia Post"
+      },
+      { 
+        title: "2012", 
+        description: "Technical Writer", 
+        company: "Masterwork Automodules Tech Corp."
+      },
+      { title: "Current", description: "Upskill Now, Unlock Wow!" }
     ];
   }
 
@@ -249,6 +287,7 @@ export class TimelineElement extends LitElement {
           <event-element
             .title=${event.title}
             .description=${event.description}
+            .company=${event.company}
             ?is-odd=${index % 2 === 0}
             role="listitem"
           ></event-element>
