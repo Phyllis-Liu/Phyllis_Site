@@ -117,7 +117,7 @@ class EventElement extends LitElement {
       font-size: 0.9rem;
       color: #666;
     }
-    
+
     .company-name {
       display: block;
       margin-top: 3px;
@@ -229,21 +229,21 @@ export class TimelineElement extends LitElement {
       transform: translateY(-50%);
     }
 
-    /* 控制按鈕放在最底部，確保有足夠距離 */
+    /* 控制按鈕放在最上方，確保有足夠距離 */
     .controls {
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      bottom: -120px;
-      left: 0;
-      right: 0;
-      gap: 15px;
-      z-index: 5;
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 10px 0;
-      border-radius: 30px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+  display: flex;
+  justify-content: flex-end; /* 原本是 center，改為 flex-end 讓按鈕靠右 */
+  position: absolute;
+  top: -120px;
+  left: auto; /* 取消 left 限制 */
+  right: 20px; /* 讓按鈕群組靠右對齊 */
+  gap: 15px;
+  z-index: 5;
+  background-color: transparent; /* 設為透明，去掉白色背景 */
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: none; /* 移除陰影 */
+}
 
     button {
       background-color: #f5f5f5;
@@ -318,7 +318,7 @@ export class TimelineElement extends LitElement {
       }
 
       .controls {
-        bottom: -130px;
+        top: -130px;
         flex-wrap: wrap;
       }
 
@@ -337,39 +337,39 @@ export class TimelineElement extends LitElement {
   constructor() {
     super();
     this.events = [
-      { 
-        title: "2010", 
-        description: "Administrative Officer", 
+      {
+        title: "2010",
+        description: "Administrative Officer",
         company: "Power Point Management Ltd."
       },
-      { 
-        title: "2011", 
-        description: "Marcom Executive", 
+      {
+        title: "2011",
+        description: "Marcom Executive",
         company: "iMap Intelligence Training."
       },
-      { 
-        title: "2012", 
-        description: "Customs Clearance Agent", 
+      {
+        title: "2012",
+        description: "Customs Clearance Agent",
         company: "U-Line Express Ltd."
       },
-      { 
-        title: "2013", 
-        description: "Marcom Exec & Manual Writer", 
+      {
+        title: "2013",
+        description: "Marcom Exec & Manual Writer",
         company: "Rextron International, Inc."
       },
-      { 
-        title: "2015", 
-        description: "Digital Marketing Executive", 
+      {
+        title: "2015",
+        description: "Digital Marketing Executive",
         company: "WaveThink Technology., Inc."
       },
-      { 
-        title: "2017", 
-        description: "Postal Service Officer", 
+      {
+        title: "2017",
+        description: "Postal Service Officer",
         company: "Australia Post"
       },
-      { 
-        title: "2012", 
-        description: "Technical Writer", 
+      {
+        title: "2012",
+        description: "Technical Writer",
         company: "Masterwork Automodules Tech Corp."
       },
       { title: "Current", description: "Upskill Now, Unlock Wow!" }
@@ -431,6 +431,14 @@ export class TimelineElement extends LitElement {
   render() {
     return html`
       <div class="container">
+        <div class="controls">
+          <button @click=${this.goToPrevious}>PREVIOUS</button>
+          <button @click=${this.toggleAutoplay} class="${this.isPlaying ? 'active' : ''}">
+            ${this.isPlaying ? 'STOP' : 'PLAY'}
+          </button>
+          <button @click=${this.goToNext}>NEXT</button>
+        </div>
+
         <div class="timeline" role="list">
           ${this.events.map((event, index) => html`
             <event-element
@@ -444,25 +452,17 @@ export class TimelineElement extends LitElement {
             ></event-element>
           `)}
         </div>
-        
+
         <!-- 增加空間，確保內容有足夠顯示區域 -->
         <div class="spacer"></div>
-        
+
         <div class="progress-indicator">
           ${this.events.map((_, index) => html`
-            <div 
+            <div
               class="progress-dot ${index === this.activeIndex ? 'active' : ''}"
               @click=${() => this.selectIndex(index)}
             ></div>
           `)}
-        </div>
-        
-        <div class="controls">
-          <button @click=${this.goToPrevious}>PREVIOUS</button>
-          <button @click=${this.toggleAutoplay} class="${this.isPlaying ? 'active' : ''}">
-            ${this.isPlaying ? 'STOP' : 'PLAY'}
-          </button>
-          <button @click=${this.goToNext}>NEXT</button>
         </div>
       </div>
     `;
