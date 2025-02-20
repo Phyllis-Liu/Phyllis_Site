@@ -32,7 +32,7 @@ export class Header extends LitElement {
     render() {
         return html`
             <div class="header">
-                <div class="logo-area">LOGO AREA</div>
+                <a href="index.html" class="nav-item">LOGO AREA</a>
                 <nav class="nav-menu">
                     <a href="skills.html" class="nav-item">SKILL</a>
                     <a href="experience.html" class="nav-item">EXPERIENCE</a>
