@@ -100,9 +100,7 @@ export class ExperiencePage extends LitElement {
           </div>
         </div>
 
-        <div class="copyright">
-          Copyright © 2025 Phyllis Liu. All rights reserved.
-        </div>
+        
       </div>
       <footer-component></footer-component>
     `;

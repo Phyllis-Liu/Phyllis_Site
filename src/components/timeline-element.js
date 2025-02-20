@@ -220,6 +220,7 @@ export class TimelineElement extends LitElement {
         top: 0;
         transform: none;
       }
+        
     }
   `;
 
