@@ -52,6 +52,12 @@ export class SkillPage extends LitElement {
       right: 50px;
     }
 
+    .technical-writing .text {
+      position: relative;
+      top: 0px;  /* 向下移動文字 */
+      left:20px;  /* 向右移動文字 */
+}
+
     .front-end {
       background-color: #D8E1D7;
       bottom: 50px;
@@ -69,7 +75,7 @@ export class SkillPage extends LitElement {
         <h1>Skill & Ability</h1>
         <div class="venn-diagram">
           <div class="circle marketing">Marketing</div>
-          <div class="circle technical-writing">Technical Writing</div>
+          <div class="circle technical-writing"><span class="text">Technical Writing</span></div>
           <div class="circle front-end">Front-End</div>
         </div>
       </div>
