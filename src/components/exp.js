@@ -1,7 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import './timeline-element.js';
-import { Header } from './header.js';
-import { Footer } from './footer.js';
+import { TimelineElement } from './timeline.js';
 
 export class ExperiencePage extends LitElement {
   static styles = css`

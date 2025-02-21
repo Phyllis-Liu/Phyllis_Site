@@ -1,8 +1,9 @@
 import './components/my-app.js';
-import './components/skill-page.js';
-import './components/blog-page.js';
-import './components/experience-page.js';
-import './components/timeline-element.js';
+import './components/skill.js';
+import './components/blog.js';
+import './components/exp.js';
+import './components/timeline.js';
+import './components/contact.js';
 
 // 添加全局樣式
 const style = document.createElement('style');

@@ -1,6 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import { Header } from './header.js';
-import { Footer } from './footer.js';
 
 export class SkillPage extends LitElement {
   static styles = css`
