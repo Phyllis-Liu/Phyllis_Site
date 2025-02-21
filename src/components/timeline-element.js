@@ -201,7 +201,6 @@ export class TimelineElement extends LitElement {
       max-width: 1000px;
       margin: 0 auto;
       position: relative;
-      /* 大幅增加上下間距，確保有足夠顯示空間 */
       padding: 100px 20px 160px;
     }
 
@@ -214,7 +213,6 @@ export class TimelineElement extends LitElement {
       position: relative;
       justify-content: space-between;
       align-items: center;
-      /* 增加時間軸高度，確保上下都有足夠空間 */
       min-height: 200px;
     }
 
@@ -229,21 +227,20 @@ export class TimelineElement extends LitElement {
       transform: translateY(-50%);
     }
 
-    /* 控制按鈕放在最上方，確保有足夠距離 */
     .controls {
-  display: flex;
-  justify-content: flex-end; /* 原本是 center，改為 flex-end 讓按鈕靠右 */
-  position: absolute;
-  top: -120px;
-  left: auto; /* 取消 left 限制 */
-  right: 20px; /* 讓按鈕群組靠右對齊 */
-  gap: 15px;
-  z-index: 5;
-  background-color: transparent; /* 設為透明，去掉白色背景 */
-  padding: 10px 20px;
-  border-radius: 30px;
-  box-shadow: none; /* 移除陰影 */
-}
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      top: -120px;
+      left: auto;
+      right: 20px;
+      gap: 15px;
+      z-index: 5;
+      background-color: transparent;
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: none;
+    }
 
     button {
       background-color: #f5f5f5;
@@ -266,31 +263,6 @@ export class TimelineElement extends LitElement {
       color: white;
     }
 
-    .progress-indicator {
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      bottom: -90px;
-      left: 0;
-      right: 0;
-      gap: 8px;
-    }
-
-    .progress-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: #ddd;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .progress-dot.active {
-      background-color: var(--dot-border-color);
-      transform: scale(1.2);
-    }
-
-    /* 在時間軸下方增加清除浮動的空間 */
     .spacer {
       height: 100px;
       width: 100%;
@@ -320,10 +292,6 @@ export class TimelineElement extends LitElement {
       .controls {
         top: -130px;
         flex-wrap: wrap;
-      }
-
-      .progress-indicator {
-        bottom: -100px;
       }
     }
   `;
@@ -381,7 +349,6 @@ export class TimelineElement extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // 自動開始播放
     this.startAutoplay();
   }
 
@@ -394,7 +361,7 @@ export class TimelineElement extends LitElement {
     this.isPlaying = true;
     this.playInterval = setInterval(() => {
       this.activeIndex = (this.activeIndex + 1) % this.events.length;
-    }, 3000); // 每3秒切換一次
+    }, 3000);
   }
 
   stopAutoplay() {
@@ -453,17 +420,7 @@ export class TimelineElement extends LitElement {
           `)}
         </div>
 
-        <!-- 增加空間，確保內容有足夠顯示區域 -->
         <div class="spacer"></div>
-
-        <div class="progress-indicator">
-          ${this.events.map((_, index) => html`
-            <div
-              class="progress-dot ${index === this.activeIndex ? 'active' : ''}"
-              @click=${() => this.selectIndex(index)}
-            ></div>
-          `)}
-        </div>
       </div>
     `;
   }
