@@ -201,7 +201,7 @@ export class TimelineElement extends LitElement {
       max-width: 1000px;
       margin: 0 auto;
       position: relative;
-      padding: 100px 20px 160px;
+      padding: 100px 30px 0px;
     }
 
     .container {

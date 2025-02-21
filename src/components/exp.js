@@ -16,38 +16,35 @@ export class ExperiencePage extends LitElement {
     .experience-page {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 10px;
       flex: 1;
-      /* 增加底部間距，確保內容不被 footer 覆蓋 */
-      padding-bottom: 120px;
+      padding-bottom: 50px; /* 稍微減少底部間距 */
     }
 
     .title {
       font-size: 48px;
       color: #666;
-      margin-bottom: 50px;
+      margin-bottom: 30px; /* 減少標題底部間距 */
     }
 
     .education {
-      margin-top: 100px;
-      padding-top: 30px;
+      margin-top: 0px; /* 減少教育區塊的頂部間距 */
+      padding-top: 20px;
       clear: both;
-      /* 確保 education 區塊與 footer 之間有足夠間距 */
-      margin-bottom: 60px;
+      margin-bottom: 40px; /* 減少教育區塊的底部間距 */
     }
 
     .education-title {
       font-size: 48px;
       color: #666;
-      margin-bottom: 50px;
+      margin-bottom: 30px; /* 減少教育標題底部間距 */
     }
 
     .education-items {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      /* 確保底部有足夠間距 */
-      margin-bottom: 30px;
+      gap: 30px; /* 減少教育項目之間的間距 */
+      margin-bottom: 20px; /* 減少底部間距 */
     }
 
     .education-item {
@@ -90,15 +87,13 @@ export class ExperiencePage extends LitElement {
       padding: 20px 0;
     }
 
-    /* 確保時間線和教育部分不重疊 */
     timeline-element {
       display: block;
-      margin-bottom: 60px;
+      margin-bottom: 40px; /* 減少時間軸底部間距 */
       position: relative;
       z-index: 1;
     }
 
-    /* 確保 footer 正確定位 */
     footer-component {
       margin-top: auto;
       position: relative;
@@ -110,7 +105,7 @@ export class ExperiencePage extends LitElement {
     return html`
       <header-component></header-component>
       <div class="experience-page">
-        <h1 class="title">Experience</h1>        
+        <h1 class="title">Experience</h1>
         <timeline-element></timeline-element>
 
         <div class="education">
